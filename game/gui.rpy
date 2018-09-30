@@ -11,8 +11,6 @@ init offset = -2
 init python:
     gui.init(1280, 720)
 
-
-
 ################################################################################
 ## GUI Configuration Variables
 ################################################################################
@@ -55,31 +53,33 @@ define gui.interface_text_color = '#ffffff'
 ## Fonts and Font Sizes ########################################################
 
 ## The font used for in-game text.
-define gui.text_font = "DejaVuSans.ttf"
+define gui.text_font = "fonts/NovaSquare.ttf"
 
 ## The font used for character names.
-define gui.name_text_font = "DejaVuSans.ttf"
+define gui.name_text_font = "fonts/DecoTech.otf"
 
 ## The font used for out-of-game text.
-define gui.interface_text_font = "DejaVuSans.ttf"
+define gui.interface_text_font = "fonts/DecoTech.otf"
+
+define gui.glyph_font = "DejaVuSans.ttf"
 
 ## The size of normal dialogue text.
-define gui.text_size = 22
+define gui.text_size = 28
 
 ## The size of character names.
-define gui.name_text_size = 30
+define gui.name_text_size = 40
 
 ## The size of text in the game's user interface.
-define gui.interface_text_size = 22
+define gui.interface_text_size = 32
 
 ## The size of labels in the game's user interface.
-define gui.label_text_size = 24
+define gui.label_text_size = 32
 
 ## The size of text on the notify screen.
-define gui.notify_text_size = 16
+define gui.notify_text_size = 32
 
 ## The size of the game's title.
-define gui.title_text_size = 50
+define gui.title_text_size = 64
 
 
 ## Main and Game Menus #########################################################
@@ -94,18 +94,18 @@ define gui.game_menu_background = "gui/game_menu.png"
 ## These variables control how dialogue is displayed on the screen one line at a
 ## time.
 
-## The height of the textbox containing dialogue.
-define gui.textbox_height = 185
+## The height and width of the textbox containing dialogue.
+define gui.textbox_height = 220
+define gui.textbox_width = 960
 
 ## The placement of the textbox vertically on the screen. 0.0 is the top, 0.5 is
 ## center, and 1.0 is the bottom.
-define gui.textbox_yalign = 1.0
-
+define gui.textbox_yalign = 0.93
 
 ## The placement of the speaking character's name, relative to the textbox.
 ## These can be a whole number of pixels from the left or top, or 0.5 to center.
-define gui.name_xpos = 240
-define gui.name_ypos = 0
+define gui.name_xpos = 10
+define gui.name_ypos = -44
 
 ## The horizontal alignment of the character's name. This can be 0.0 for left-
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.
@@ -118,7 +118,7 @@ define gui.namebox_height = None
 
 ## The borders of the box containing the character's name, in left, top, right,
 ## bottom order.
-define gui.namebox_borders = Borders(5, 5, 5, 5)
+define gui.namebox_borders = Frame("gui/namebox_base.png", 80, 80)
 
 ## If True, the background of the namebox will be tiled, if False, the
 ## background of the namebox will be scaled.
@@ -128,15 +128,17 @@ define gui.namebox_tile = False
 ## The placement of dialogue relative to the textbox. These can be a whole
 ## number of pixels relative to the left or top side of the textbox, or 0.5 to
 ## center.
-define gui.dialogue_xpos = 268
-define gui.dialogue_ypos = 50
+define gui.dialogue_xpos = 50
+define gui.dialogue_ypos = 40
 
 ## The maximum width of dialogue text, in pixels.
-define gui.dialogue_width = 744
+define gui.dialogue_width = 860
+define gui.dialogue_height = 0
 
 ## The horizontal alignment of the dialogue text. This can be 0.0 for left-
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.
-define gui.dialogue_text_xalign = 0.0
+define gui.dialogue_text_xalign = 0
+define gui.dialogue_text_yalign = 0.5
 
 
 ## Buttons #####################################################################
@@ -187,7 +189,8 @@ define gui.confirm_button_text_xalign = 0.5
 define gui.page_button_borders = Borders(10, 4, 10, 4)
 
 define gui.quick_button_borders = Borders(10, 4, 10, 0)
-define gui.quick_button_text_size = 14
+define gui.quick_button_text_size = 32
+define gui.quick_button_text_outlines = [ (2, "#000000") ]
 define gui.quick_button_text_idle_color = gui.idle_small_color
 define gui.quick_button_text_selected_color = gui.accent_color
 
@@ -202,16 +205,18 @@ define gui.quick_button_text_selected_color = gui.accent_color
 ##
 ## Choice buttons are used in the in-game menus.
 
-define gui.choice_button_width = 790
+define gui.choice_button_width = 940
 define gui.choice_button_height = None
 define gui.choice_button_tile = False
-define gui.choice_button_borders = Borders(100, 5, 100, 5)
+define gui.choice_button_borders = Borders(40, 10, 40, 20)
+define gui.choice_button_background = Frame("GUI/choicebox_base.png", 80, 80)
+define gui.choice_button_background_hover = Frame("GUI/choicebox_selected.png", 80, 80)
 define gui.choice_button_text_font = gui.text_font
 define gui.choice_button_text_size = gui.text_size
-define gui.choice_button_text_xalign = 0.5
-define gui.choice_button_text_idle_color = "#cccccc"
+define gui.choice_button_text_xalign = 1.0
+define gui.choice_button_text_idle_color = "#808080"
 define gui.choice_button_text_hover_color = "#ffffff"
-
+define gui.choice_button_text_outlines = [ (2, "#000000") ]
 
 ## File Slot Buttons ###########################################################
 ##
@@ -253,11 +258,14 @@ define gui.skip_ypos = 10
 ## The vertical position of the notify screen.
 define gui.notify_ypos = 45
 
+## The spacing between lines of dialogue text.
+define gui.dialogue_spacing = 12
+
 ## The spacing between menu choices.
-define gui.choice_spacing = 22
+define gui.choice_spacing = -10
 
 ## Buttons in the navigation section of the main and game menus.
-define gui.navigation_spacing = 4
+define gui.navigation_spacing = 5
 
 ## Controls the amount of spacing between preferences.
 define gui.pref_spacing = 10

@@ -5,6 +5,7 @@
 init offset = -1
 
 
+
 ################################################################################
 ## Styles
 ################################################################################
@@ -132,21 +133,25 @@ style namebox_label is say_label
 
 style window:
     xalign 0.5
-    xfill True
     yalign gui.textbox_yalign
+    xfill True
+    xsize gui.textbox_width
     ysize gui.textbox_height
-
-    background Image("gui/textbox.png", xalign=0.5, yalign=1.0)
+    xmargin 0
+    ymargin 0
+    xpadding 0
+    ypadding 0
+    background Frame("GUI/frame_base.png", 80, 80)
 
 style namebox:
-    xpos gui.name_xpos
     xanchor gui.name_xalign
-    xsize gui.namebox_width
+    xpos gui.name_xpos
     ypos gui.name_ypos
-    ysize gui.namebox_height
-
-    background Frame("gui/namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
-    padding gui.namebox_borders.padding
+    xmargin 0
+    ymargin 0
+    xpadding 40
+    top_padding 15
+    background Frame("gui/namebox_base.png", 80, 80)
 
 style say_label:
     properties gui.text_properties("name", accent=True)
@@ -155,10 +160,12 @@ style say_label:
 
 style say_dialogue:
     properties gui.text_properties("dialogue")
-
-    xpos gui.dialogue_xpos
     xsize gui.dialogue_width
+    ysize gui.dialogue_height
+    xpos gui.dialogue_xpos
     ypos gui.dialogue_ypos
+    line_spacing gui.dialogue_spacing
+
 
 
 ## Input screen ################################################################
@@ -223,17 +230,22 @@ style choice_button_text is button_text
 
 style choice_vbox:
     xalign 0.5
-    ypos 270
-    yanchor 0.5
-
+    ypos 5
+    yanchor 0
     spacing gui.choice_spacing
 
 style choice_button is default:
     properties gui.button_properties("choice_button")
+    background gui.choice_button_background
+    hover_background gui.choice_button_background_hover
 
 style choice_button_text is default:
     properties gui.button_text_properties("choice_button")
-
+    xsize 900
+    xpos 1.0
+    ypos 10
+    line_spacing gui.dialogue_spacing
+    
 
 ## Quick Menu screen ###########################################################
 ##
@@ -258,9 +270,9 @@ screen quick_menu():
             textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
             textbutton _("Auto") action Preference("auto-forward", "toggle")
             textbutton _("Save") action ShowMenu('save')
-            textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
+            #textbutton _("Q.Save") action QuickSave()
+            #textbutton _("Q.Load") action QuickLoad()
+            textbutton _("Settings") action ShowMenu('preferences')
 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
@@ -311,7 +323,7 @@ screen navigation():
 
         textbutton _("Load") action ShowMenu("load")
 
-        textbutton _("Preferences") action ShowMenu("preferences")
+        textbutton _("Settings") action ShowMenu("preferences")
 
         if _in_replay:
 
@@ -717,7 +729,7 @@ screen preferences():
 
     tag menu
 
-    use game_menu(_("Preferences"), scroll="viewport"):
+    use game_menu(_("Settings"), scroll="viewport"):
 
         vbox:
 
@@ -729,15 +741,17 @@ screen preferences():
                     vbox:
                         style_prefix "radio"
                         label _("Display")
-                        textbutton _("Window") action Preference("display", "window")
-                        textbutton _("Fullscreen") action Preference("display", "fullscreen")
-
-                vbox:
-                    style_prefix "radio"
-                    label _("Rollback Side")
-                    textbutton _("Disable") action Preference("rollback side", "disable")
-                    textbutton _("Left") action Preference("rollback side", "left")
-                    textbutton _("Right") action Preference("rollback side", "right")
+                        textbutton _("Fullscreen") action Preference("display", "toggle")
+                        textbutton _("Standard") action SetField(config, "screen_width", 960), renpy.reset_physical_size
+                        textbutton _("Widescreen") action SetField(config, "screen_width", 1280), renpy.reset_physical_size
+                        # textbutton _("Window") action Preference("display", "window")
+                    
+                #vbox:
+                #    style_prefix "radio"
+                #    label _("Rollback Side")
+                #    textbutton _("Disable") action Preference("rollback side", "disable")
+                #    textbutton _("Left") action Preference("rollback side", "left")
+                #    textbutton _("Right") action Preference("rollback side", "right")
 
                 vbox:
                     style_prefix "check"

@@ -1,0 +1,36 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/intro.rpy", line 56, in script
+    q "Yeah. Though {right}technically{/right} there's still some microscopic life under that red dirt? But nothing else can survive."
+  File "game/script.rpy", line 25, in right_tag
+    size = int(argument) * 20
+ValueError: invalid literal for int() with base 10: ''
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/intro.rpy", line 56, in script
+    q "Yeah. Though {right}technically{/right} there's still some microscopic life under that red dirt? But nothing else can survive."
+  File "C:\Users\Difference Engine\Utilities\Renpy 7.1.0\renpy\ast.py", line 678, in execute
+    renpy.exports.say(who, what, interact=self.interact, *args, **kwargs)
+  File "C:\Users\Difference Engine\Utilities\Renpy 7.1.0\renpy\exports.py", line 1203, in say
+    who(what, *args, **kwargs)
+  File "C:\Users\Difference Engine\Utilities\Renpy 7.1.0\renpy\character.py", line 1027, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, **display_args)
+  File "C:\Users\Difference Engine\Utilities\Renpy 7.1.0\renpy\character.py", line 819, in do_display
+    **display_args)
+  File "C:\Users\Difference Engine\Utilities\Renpy 7.1.0\renpy\character.py", line 552, in display_say
+    what_text.update()
+  File "C:\Users\Difference Engine\Utilities\Renpy 7.1.0\renpy\text\text.py", line 1581, in update
+    tokens = self.apply_custom_tags(tokens)
+  File "C:\Users\Difference Engine\Utilities\Renpy 7.1.0\renpy\text\text.py", line 2073, in apply_custom_tags
+    new_contents = func(tag, value, contents)
+  File "game/script.rpy", line 25, in right_tag
+    size = int(argument) * 20
+ValueError: invalid literal for int() with base 10: ''
+
+Windows-7-6.1.7601-SP1
+Ren'Py 7.1.0.882
+Hearts of Stone 0.1
+Sun Sep 30 02:10:57 2018
